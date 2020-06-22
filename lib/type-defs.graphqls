@@ -1,9 +1,14 @@
-type User {
-  id: ID!
-  name: String!
-  status: String!
+type AnimeTitle {
+  title: String!
+  year: String
+}
+type Anime {
+  title: String!
+  sub_title: String!
+  data_asin: String!
 }
 
 type Query {
-  viewer: User!
+  animes: [AnimeTitle!]!
+  anime(title: String!): [Anime!]!
 }

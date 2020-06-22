@@ -10,24 +10,24 @@ export type ResolverContext = {
   res?: ServerResponse
 }
 
-function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === 'undefined') {
-    const { SchemaLink } = require('apollo-link-schema')
-    const { schema } = require('./schema')
-    return new SchemaLink({ schema, context })
-  } else {
+function createIsomorphLink() {
+  // if (typeof window === 'undefined') {
+  //   const { SchemaLink } = require('apollo-link-schema')
+  //   const { schema } = require('./schema')
+  //   return new SchemaLink({ schema, context })
+  // } else {
     const { HttpLink } = require('apollo-link-http')
     return new HttpLink({
-      uri: '/api/graphql',
-      credentials: 'same-origin',
+      uri: 'https://amazon-anime-bot.herokuapp.com/graphql',
+      // credentials: 'same-origin',
     })
-  }
+  // }
 }
 
-function createApolloClient(context?: ResolverContext) {
+function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: createIsomorphLink(context),
+    link: createIsomorphLink(),
     cache: new InMemoryCache(),
   })
 }
@@ -36,9 +36,8 @@ export function initializeApollo(
   initialState: any = null,
   // Pages with Next.js data fetching methods, like `getStaticProps`, can send
   // a custom context which will be used by `SchemaLink` to server render pages
-  context?: ResolverContext
 ) {
-  const _apolloClient = apolloClient ?? createApolloClient(context)
+  const _apolloClient = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // get hydrated here
