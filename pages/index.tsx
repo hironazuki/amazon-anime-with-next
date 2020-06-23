@@ -5,7 +5,6 @@ import { initializeApollo } from '../lib/apollo';
 const Index = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
-  // const [spring, summer, fall, winter] = animes.map(anime => anime.)
   return (
     <div>
       {animes.map(anime => (
