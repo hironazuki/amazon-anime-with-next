@@ -9,7 +9,7 @@ const Index = () => {
     <div>
       {animes.map(anime => (
         // <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
-        <a>{anime.title}</a>
+        <p>{anime.title}</p>
         // </Link>
       ))}
       {/* <h1>Old</h1>
