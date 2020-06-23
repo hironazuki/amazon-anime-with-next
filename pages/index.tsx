@@ -5,12 +5,13 @@ import { initializeApollo } from '../lib/apollo';
 const Index = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
-  const new_animes = animes.filter(a => a.year === '2020');
-  // const old_animes = animes.filter(a => a.year !== '2020');
+  // const [spring, summer, fall, winter] = animes.map(anime => anime.)
   return (
     <div>
-      {new_animes.map(anime => (
-        <p>{anime.title}</p>
+      {animes.map(anime => (
+        // <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
+        <a>{anime.title}</a>
+        // </Link>
       ))}
       {/* <h1>Old</h1>
       {old_animes.map(anime => (
@@ -25,7 +26,7 @@ const Index = () => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({

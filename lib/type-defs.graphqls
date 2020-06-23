@@ -1,6 +1,6 @@
 type AnimeTitle {
   title: String!
-  year: String
+  year: String!
 }
 type Anime {
   title: String!
