@@ -7,16 +7,13 @@ const Index = () => {
   const { animes } = data!;
   return (
     <div>
-      {animes.map(anime => (
-        // <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
-        <p>{anime.title}</p>
-        // </Link>
+      {animes.map((anime, key) => (
+        <li key={key}>
+          <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
+            <a>{anime.title}</a>
+          </Link>
+        </li>
       ))}
-      {/* <h1>Old</h1>
-      {old_animes.map(anime => (
-        <p>{anime.title}</p>
-      ))} */}
-      {/* You're signed in as {viewer.name} and you're {viewer.status} go to the{' '} */}
       <Link href="/about">
         <a>about</a>
       </Link>{' '}
@@ -29,13 +26,13 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: AnimesDocument
+    query: AnimesDocument,
   });
 
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract()
-    }
+      initialApolloState: apolloClient.cache.extract(),
+    },
   };
 }
 
