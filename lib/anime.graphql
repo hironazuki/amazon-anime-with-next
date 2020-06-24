@@ -1,13 +1,18 @@
 query Anime($title: String!)  {
   anime(title: $title){
-    title
-    sub_title
-    data_asin
+    id
+    subTitle
+    createdAt
   }
 }
 
 
 query Animes {
+  animes {
+    title
+    year
+  }
+}query Animes {
   animes {
     title
     year

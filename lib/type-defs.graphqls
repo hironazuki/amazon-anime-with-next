@@ -3,9 +3,9 @@ type AnimeTitle {
   year: String!
 }
 type Anime {
-  title: String!
-  sub_title: String!
-  data_asin: String!
+  id: ID!
+  subTitle: String!
+  createdAt: String!
 }
 
 type Query {
