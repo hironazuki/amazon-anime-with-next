@@ -1,10 +1,10 @@
-import { AppProps } from 'next/app';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { useApollo } from '../lib/apollo';
-import Layout from '../components/Layout';
-import Header from '../components/Header';
+import { AppProps } from "next/app";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { useApollo } from "../lib/apollo";
+import Layout from "../components/Layout";
+import Header from "../components/Header";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps): JSX.Element {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
@@ -16,3 +16,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </ApolloProvider>
   );
 }
+
+export default App;
