@@ -1,4 +1,4 @@
-schema: lib/type-defs.graphqls
+schema: https://amazon-anime-bot.herokuapp.com/graphql
 documents: '**/*.graphql'
 plugins:
   - typescript
