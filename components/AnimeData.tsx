@@ -1,4 +1,4 @@
-import { useAnimeQuery } from '../lib/anime.graphql';
+import { useAnimeQuery } from "../lib/anime.graphql";
 
 const AnimeData: React.FC<{ title: string }> = ({ title }) => {
   const { loading, data } = useAnimeQuery({
@@ -53,7 +53,7 @@ const AnimeData: React.FC<{ title: string }> = ({ title }) => {
     border-style: solid;
     border-width: 6px 4px 0 4px;
     border-color: #ffffff transparent transparent transparent;
-    content: '';
+    content: "";
     height: 0;
     margin-right: 5px;
     width: 0;

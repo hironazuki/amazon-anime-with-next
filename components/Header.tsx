@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Header = () => {
   const { pathname } = useRouter();
@@ -7,10 +7,10 @@ const Header = () => {
   return (
     <header>
       <Link href="/">
-        <a className={pathname === '/' ? 'is-active' : ''}>Home</a>
+        <a className={pathname === "/" ? "is-active" : ""}>Home</a>
       </Link>
       <Link href="/about">
-        <a className={pathname === '/about' ? 'is-active' : ''}>About</a>
+        <a className={pathname === "/about" ? "is-active" : ""}>About</a>
       </Link>
       <style jsx>{`
         header {

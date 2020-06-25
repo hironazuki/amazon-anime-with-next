@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import { useAnimesQuery, AnimesDocument } from '../lib/anime.graphql';
-import { initializeApollo } from '../lib/apollo';
+import Link from "next/link";
+import { useAnimesQuery, AnimesDocument } from "../lib/anime.graphql";
+import { initializeApollo } from "../lib/apollo";
 
-const Index = () => {
+const Index: React.FC = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
   return (
@@ -16,7 +16,7 @@ const Index = () => {
       ))}
       <Link href="/about">
         <a>about</a>
-      </Link>{' '}
+      </Link>{" "}
       page.
     </>
   );
