@@ -6,7 +6,7 @@ const Index = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
   return (
-    <div>
+    <>
       {animes.map((anime, key) => (
         <li key={key}>
           <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
@@ -18,7 +18,7 @@ const Index = () => {
         <a>about</a>
       </Link>{' '}
       page.
-    </div>
+    </>
   );
 };
 
@@ -35,5 +35,4 @@ export async function getServerSideProps() {
     },
   };
 }
-
 export default Index;

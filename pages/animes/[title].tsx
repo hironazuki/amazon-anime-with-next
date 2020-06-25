@@ -7,13 +7,13 @@ const Title = () => {
   const { title } = router.query;
   if (typeof title === 'string') {
     return (
-      <div>
+      <>
         <AnimeData title={title} />
         <Link href="/">
           <a>Home</a>
         </Link>{' '}
         page.
-      </div>
+      </>
     );
   }
   return null;
