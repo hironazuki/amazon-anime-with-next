@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import { useAnimesQuery, AnimesDocument } from '../lib/anime.graphql';
-import { initializeApollo } from '../lib/apollo';
-
-const Index = () => {
+import Link from "next/link";
+import { useAnimesQuery, AnimesDocument } from "../lib/anime.graphql";
+import { initializeApollo } from "../lib/apollo";
+import { GetServerSideProps } from "next";
+const Index: React.FC = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
   return (
-    <div>
+    <>
       {animes.map((anime, key) => (
         <li key={key}>
           <Link href="/animes/[title]" as={`/animes/${anime.title}`}>
@@ -16,13 +16,13 @@ const Index = () => {
       ))}
       <Link href="/about">
         <a>about</a>
-      </Link>{' '}
+      </Link>{" "}
       page.
-    </div>
+    </>
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
@@ -34,6 +34,5 @@ export async function getServerSideProps() {
       initialApolloState: apolloClient.cache.extract(),
     },
   };
-}
-
+};
 export default Index;
