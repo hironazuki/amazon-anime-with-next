@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const { pathname } = useRouter();
 
   return (
