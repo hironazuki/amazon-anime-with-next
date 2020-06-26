@@ -1,5 +1,8 @@
 import { useAnimeQuery } from "../lib/anime.graphql";
-
+import moment from "moment";
+moment.locale("ja", {
+  weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
+});
 const AnimeData: React.FC<{ title: string }> = ({ title }) => {
   const { loading, data } = useAnimeQuery({
     variables: { title },
@@ -11,12 +14,24 @@ const AnimeData: React.FC<{ title: string }> = ({ title }) => {
   // });
 
   // console.log(test);
+
+  const formatMinute = (createdAt: string) => {
+    const minutes = moment(createdAt).minutes();
+    const usedMinutes = String(Math.floor(minutes / 10) * 10);
+    return moment(createdAt).format("M月D日(ddd) HH：" + usedMinutes);
+  };
+
+  const animes = anime.map((a) => {
+    return { ...a, createdAt: formatMinute(a.createdAt) };
+  });
   return (
     <div>
-      {anime.map((anime) => (
-        <li key={anime.id}>
-          {anime.subTitle} {anime.createdAt}
-        </li>
+      {animes.map((a) => (
+        <div key={a.id}>
+          <span>{a.subTitle}</span>
+          <br />
+          <span>{a.createdAt}</span>
+        </div>
       ))}
     </div>
   );
