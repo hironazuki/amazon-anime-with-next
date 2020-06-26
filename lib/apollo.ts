@@ -5,29 +5,12 @@ import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-export type ResolverContext = {
-  req?: IncomingMessage;
-  res?: ServerResponse;
-};
-
-function createIsomorphLink() {
-  // if (typeof window === 'undefined') {
-  //   const { SchemaLink } = require('apollo-link-schema')
-  //   const { schema } = require('./schema')
-  //   return new SchemaLink({ schema, context })
-  // } else {
-  // const { HttpLink } = require("apollo-link-http");
-  return new HttpLink({
-    uri: "https://amazon-anime-bot.herokuapp.com/graphql",
-    // credentials: 'same-origin',
-  });
-  // }
-}
-
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(),
+    link: new HttpLink({
+      uri: "https://amazon-anime-bot.herokuapp.com/graphql",
+    }),
     cache: new InMemoryCache(),
   });
 }

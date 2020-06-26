@@ -2,9 +2,11 @@ import Link from "next/link";
 import { useAnimesQuery, AnimesDocument } from "../lib/anime.graphql";
 import { initializeApollo } from "../lib/apollo";
 import { GetServerSideProps } from "next";
+
 const Index: React.FC = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
+
   return (
     <>
       {animes.map((anime, key) => (

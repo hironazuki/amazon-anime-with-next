@@ -6,15 +6,10 @@ query Anime($title: String!)  {
   }
 }
 
-
 query Animes {
   animes {
     title
     year
-  }
-}query Animes {
-  animes {
-    title
-    year
+    createdAt
   }
 }
