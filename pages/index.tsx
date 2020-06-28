@@ -35,6 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
+    unstable_revalidate: 1,
   };
 };
 export default Index;
