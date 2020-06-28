@@ -1,5 +1,8 @@
-import { useAnimeQuery } from "../lib/anime.graphql";
+import { useAnimeQuery, AnimeDocument } from "../lib/anime.graphql";
 import moment from "moment";
+import { initializeApollo } from "../lib/apollo";
+import { GetServerSideProps } from "next";
+
 moment.locale("ja", {
   weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
 });
@@ -74,4 +77,18 @@ const AnimeData: React.FC<{ title: string }> = ({ title }) => {
     width: 0;
   }
 `}</style>;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: AnimeDocument,
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+};
 export default AnimeData;
