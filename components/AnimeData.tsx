@@ -1,6 +1,6 @@
 import { useAnimeQuery } from "../lib/anime.graphql";
 import moment from "moment";
-moment.locale("ja", {
+moment.updateLocale("ja", {
   weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
 });
 const AnimeData: React.FC<{ title: string }> = ({ title }) => {
