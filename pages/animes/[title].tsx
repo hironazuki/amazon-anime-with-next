@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AnimeData from "../../components/AnimeData";
-import { AnimesDocument, useAnimeQuery } from "../../lib/anime.graphql";
+import {
+  AnimesDocument,
+  AnimeDocument,
+  useAnimeQuery,
+} from "../../lib/anime.graphql";
+import { getAllAnimeTitles } from "../../lib/animes";
 import { initializeApollo } from "../../lib/apollo";
 import { GetStaticProps, GetStaticPaths } from "next";
 
@@ -30,31 +35,34 @@ const Title: React.FC = () => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // const { data } = useAnimesQuery();
-  // const paths = getAllAnimeTitles(data!);
+  const apolloClient = initializeApollo();
+
+  const query = await apolloClient.query({
+    query: AnimesDocument,
+  });
+
+  // console.log(data.data);
+  const paths = getAllAnimeTitles(query.data);
+  console.log(paths);
   return {
-    paths: [
-      {
-        params: {
-          title: "グレイプニル",
-        },
-      },
-    ],
+    paths,
     fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo();
-
+  const title = params!.title as string;
   await apolloClient.query({
-    query: AnimesDocument,
+    query: AnimeDocument,
+    variables: { title },
   });
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
-    unstable_revalidate: 10,
+    unstable_revalidate: 30,
   };
 };
 export default Title;

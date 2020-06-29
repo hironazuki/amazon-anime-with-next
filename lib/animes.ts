@@ -1,7 +1,9 @@
-import { AnimesQuery } from "./anime.graphql";
+// import { AnimesQuery } from "./anime.graphql";
 
 export function getAllAnimeTitles(
-  data: AnimesQuery
+  // data: AnimesQuery
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  data: any
 ): {
   params: {
     title: string;
@@ -9,7 +11,7 @@ export function getAllAnimeTitles(
 }[] {
   const { animes } = data!;
 
-  return animes.map((anime) => {
+  return animes.map((anime: any) => {
     return {
       params: {
         title: anime.title,
