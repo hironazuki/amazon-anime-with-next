@@ -1,17 +1,23 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import AnimeData from "../../components/AnimeData";
-import { AnimesDocument } from "../../lib/anime.graphql";
+import { AnimesDocument, useAnimeQuery } from "../../lib/anime.graphql";
 import { initializeApollo } from "../../lib/apollo";
 import { GetStaticProps, GetStaticPaths } from "next";
 
 const Title: React.FC = () => {
   const router = useRouter();
   const { title } = router.query;
+  const stringTitle = typeof title === "string" ? title : "";
+  const { loading, data } = useAnimeQuery({
+    variables: { title: stringTitle },
+  });
+  if (loading) return <div>Loading</div>;
+  // const { anime } = data!;
   if (typeof title === "string") {
     return (
       <>
-        <AnimeData title={title} />
+        <AnimeData animeData={data!} />
         <Link href="/">
           <a>Home</a>
         </Link>{" "}
