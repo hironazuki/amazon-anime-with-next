@@ -4,16 +4,7 @@ moment.updateLocale("ja", {
   weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
 });
 const AnimeData: React.FC<{ animeData: AnimeQuery }> = ({ animeData }) => {
-  // const { loading, data } = useAnimeQuery({
-  //   variables: { title },
-  // });
-  // if (loading) return <div>Loading</div>;
   const { anime } = animeData;
-  // const test: any = anime.map((a) => {
-  //   return { sub: a.subTitle, date: a.createdAt };
-  // });
-
-  // console.log(test);
 
   const formatMinute = (createdAt: string) => {
     const minutes = moment(createdAt).minutes();
