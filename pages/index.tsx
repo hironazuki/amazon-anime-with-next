@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useAnimesQuery, AnimesDocument } from "../lib/anime.graphql";
 import { initializeApollo } from "../lib/apollo";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 const Index: React.FC = () => {
   const { data } = useAnimesQuery();
@@ -24,7 +24,7 @@ const Index: React.FC = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
+    unstable_revalidate: 30,
   };
 };
 export default Index;

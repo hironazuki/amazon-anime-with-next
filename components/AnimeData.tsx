@@ -1,19 +1,10 @@
-import { useAnimeQuery } from "../lib/anime.graphql";
+import { AnimeQuery } from "../lib/anime.graphql";
 import moment from "moment";
-moment.locale("ja", {
+moment.updateLocale("ja", {
   weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
 });
-const AnimeData: React.FC<{ title: string }> = ({ title }) => {
-  const { loading, data } = useAnimeQuery({
-    variables: { title },
-  });
-  if (loading) return <div>Loading</div>;
-  const { anime } = data!;
-  // const test: any = anime.map((a) => {
-  //   return { sub: a.subTitle, date: a.createdAt };
-  // });
-
-  // console.log(test);
+const AnimeData: React.FC<{ animeData: AnimeQuery }> = ({ animeData }) => {
+  const { anime } = animeData;
 
   const formatMinute = (createdAt: string) => {
     const minutes = moment(createdAt).minutes();
