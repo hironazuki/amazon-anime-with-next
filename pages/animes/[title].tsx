@@ -2,11 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import AnimeData from "../../components/AnimeData";
 import {
-  AnimesDocument,
+  // AnimesDocument,
   AnimeDocument,
   useAnimeQuery,
 } from "../../lib/anime.graphql";
-import { getAllAnimeTitles } from "../../lib/animes";
+// import { getAllAnimeTitles } from "../../lib/animes";
 import { initializeApollo } from "../../lib/apollo";
 import { GetStaticProps, GetStaticPaths } from "next";
 
@@ -34,18 +34,17 @@ const Title: React.FC = () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // const { data } = useAnimesQuery();
-  const apolloClient = initializeApollo();
+  // const apolloClient = initializeApollo();
 
-  const query = await apolloClient.query({
-    query: AnimesDocument,
-  });
+  // const query = await apolloClient.query({
+  //   query: AnimesDocument,
+  // });
 
-  // console.log(data.data);
-  const paths = getAllAnimeTitles(query.data);
-  console.log(paths);
+  // const paths = getAllAnimeTitles(query.data);
+
   return {
-    paths,
+    // paths,
+    paths: [{ params: { title: "グレイプニル" } }],
     fallback: true,
   };
 };
