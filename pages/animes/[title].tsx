@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import AnimeData from "../../components/AnimeData";
 import {
@@ -22,6 +23,9 @@ const Title: React.FC = () => {
   if (typeof title === "string") {
     return (
       <>
+        <Head>
+          <title>{title} | new_prime_anime更新まとめ</title>
+        </Head>
         <Header as="h2">{title}</Header>
         <AnimeData animeData={data!} />
       </>
