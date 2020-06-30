@@ -1,28 +1,39 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Container } from "semantic-ui-react";
 
 const Header = (): JSX.Element => {
   const { pathname } = useRouter();
 
   return (
     <header>
-      <Link href="/">
-        <a className={pathname === "/" ? "is-active" : ""}>Home</a>
-      </Link>
-      <Link href="/about">
-        <a className={pathname === "/about" ? "is-active" : ""}>About</a>
-      </Link>
+      <Container className="ui secondary menu">
+        <Link href="/">
+          <a className={pathname === "/" ? "item active" : "item"}>Home</a>
+        </Link>
+        <Link href="/about">
+          <a className={pathname === "/about" ? "item active" : "item"}>
+            About
+          </a>
+        </Link>
+        <div className="right menu">
+          <a
+            className="item"
+            href="https://twitter.com/new_primeAnime"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <img src="../static/amazon_new_anime.jpg" />
+          </a>
+        </div>
+      </Container>
+
       <style jsx>{`
         header {
-          margin-bottom: 25px;
+          margin-bottom: 5rem;
         }
-        a {
-          font-size: 14px;
-          margin-right: 15px;
-          text-decoration: none;
-        }
-        .is-active {
-          text-decoration: underline;
+        img {
+          border-radius: 50%;
         }
       `}</style>
     </header>
