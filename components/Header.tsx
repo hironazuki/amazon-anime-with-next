@@ -23,15 +23,12 @@ const Header = (): JSX.Element => {
             target="_blank"
             rel="noreferrer noopener"
           >
-            <img src="../static/amazon_new_anime.jpg" />
+            <img src="/images/amazon_new_anime.jpg" />
           </a>
         </div>
       </Container>
 
       <style jsx>{`
-        header {
-          margin-bottom: 5rem;
-        }
         img {
           border-radius: 50%;
         }

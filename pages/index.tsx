@@ -3,13 +3,17 @@ import { useAnimesQuery, AnimesDocument } from "../lib/anime.graphql";
 import { initializeApollo } from "../lib/apollo";
 import { GetStaticProps } from "next";
 import { List } from "semantic-ui-react";
+import Head from "next/head";
 
 const Index: React.FC = () => {
   const { data } = useAnimesQuery();
   const { animes } = data!;
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>new_prime_anime更新まとめ</title>
+      </Head>
       <List divided relaxed>
         {animes.map((anime, key) => (
           <List.Item key={key}>
@@ -21,12 +25,7 @@ const Index: React.FC = () => {
           </List.Item>
         ))}
       </List>
-      <style jsx>{`
-        div {
-          margin-bottom: 4rem;
-        }
-      `}</style>
-    </div>
+    </>
   );
 };
 
