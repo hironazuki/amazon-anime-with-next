@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import AnimeData from "../../components/AnimeData";
 import {
@@ -9,6 +8,7 @@ import {
 // import { getAllAnimeTitles } from "../../lib/animes";
 import { initializeApollo } from "../../lib/apollo";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { Header } from "semantic-ui-react";
 
 const Title: React.FC = () => {
   const router = useRouter();
@@ -22,11 +22,8 @@ const Title: React.FC = () => {
   if (typeof title === "string") {
     return (
       <>
+        <Header as="h2">{title}</Header>
         <AnimeData animeData={data!} />
-        <Link href="/">
-          <a>Home</a>
-        </Link>{" "}
-        page.
       </>
     );
   }

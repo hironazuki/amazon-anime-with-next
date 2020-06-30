@@ -1,5 +1,8 @@
 import { AnimeQuery } from "../lib/anime.graphql";
 import moment from "moment";
+
+import { List } from "semantic-ui-react";
+
 moment.updateLocale("ja", {
   weekdaysShort: ["日", "月", "火", "水", "木", "金", "土"],
 });
@@ -8,7 +11,10 @@ const AnimeData: React.FC<{ animeData: AnimeQuery }> = ({ animeData }) => {
 
   const formatMinute = (createdAt: string) => {
     const minutes = moment(createdAt).minutes();
-    const usedMinutes = String(Math.floor(minutes / 10) * 10);
+    let usedMinutes = String(Math.floor(minutes / 10) * 10);
+    if (usedMinutes.length === 1) {
+      usedMinutes = "0" + usedMinutes;
+    }
     return moment(createdAt).format("M月D日(ddd) HH：" + usedMinutes);
   };
 
@@ -16,53 +22,18 @@ const AnimeData: React.FC<{ animeData: AnimeQuery }> = ({ animeData }) => {
     return { ...a, createdAt: formatMinute(a.createdAt) };
   });
   return (
-    <div>
-      {animes.map((a) => (
-        <div key={a.id}>
-          <span>{a.subTitle}</span>
-          <br />
-          <span>{a.createdAt}</span>
-        </div>
-      ))}
-    </div>
+    <>
+      <List divided relaxed>
+        {animes.map((a) => (
+          <List.Item key={a.id}>
+            <List.Content>
+              <List.Header>{a.subTitle}</List.Header>
+              <List.Description>{a.createdAt}</List.Description>
+            </List.Content>
+          </List.Item>
+        ))}
+      </List>
+    </>
   );
 };
-<style jsx>{`
-  section {
-    padding-bottom: 20px;
-  }
-  li {
-    display: block;
-    margin-bottom: 10px;
-  }
-  div {
-    align-items: center;
-    display: flex;
-  }
-  a {
-    font-size: 14px;
-    margin-right: 10px;
-    text-decoration: none;
-    padding-bottom: 0;
-    border: 0;
-  }
-  span {
-    font-size: 14px;
-    margin-right: 5px;
-  }
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-  button:before {
-    align-self: center;
-    border-style: solid;
-    border-width: 6px 4px 0 4px;
-    border-color: #ffffff transparent transparent transparent;
-    content: "";
-    height: 0;
-    margin-right: 5px;
-    width: 0;
-  }
-`}</style>;
 export default AnimeData;
