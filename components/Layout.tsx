@@ -10,7 +10,7 @@ const Layout: React.FC = ({ children }) => {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="../static/amazon_new_anime.jpg" />
+        <meta property="og:image" content="/images/amazon_new_anime.jpg" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary" />
       </Head>
