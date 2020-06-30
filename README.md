@@ -1,57 +1,57 @@
-# TypeScript and GraphQL Example
+# 目次
 
-One of the strengths of GraphQL is [enforcing data types on runtime](https://graphql.github.io/graphql-spec/June2018/#sec-Value-Completion). Further, TypeScript and [GraphQL Code Generator](https://graphql-code-generator.com/) (graphql-codegen) make it safer by typing data statically, so you can write truly type-protected code with rich IDE assists.
+- 概要
+- 利用技術と内容
+- この課題を通して学んだこと
+- 工夫した点
+- 苦労した点
+- 参考
 
-This template extends [Apollo Server and Client Example](https://github.com/vercel/next.js/tree/canary/examples/api-routes-apollo-server-and-client#readme) by rewriting in TypeScript and integrating [graphql-let](https://github.com/piglovesyou/graphql-let#readme), which runs [TypeScript React Apollo](https://graphql-code-generator.com/docs/plugins/typescript-react-apollo) in [graphql-codegen](https://github.com/dotansimha/graphql-code-generator#readme) under the hood. It enhances the typed GraphQL use as below:
+# 概要
 
-```tsx
-import { useNewsQuery } from './news.graphql'
+- バックエンド: 定期実行によるtwitter BOTの作成
+- フロントエンド：Rails: graphql-rubyによるgraphqlAPIからデータを取得し、Next.js 9.4のIncremental Static Regeneration (beta)を使用したwebページ
 
-const News = () => {
-	// Typed already️⚡️
-	const { data: { news } } = useNewsQuery()
+## Twitter BOT
+https://twitter.com/new_primeAnime
 
-	return <div>{news.map(...)}</div>
-}
-```
+## Web ページ
+https://amazon-anime-with-next.vercel.app/
 
-By default `**/*.graphqls` is recognized as GraphQL schema and `**/*.graphql` as GraphQL documents. If you prefer the other extensions, make sure the settings of the webpack loader in `next.config.js` and `.graphql-let.yml` are consistent.
+# 利用技術と内容
 
-## Deploy your own
+## フロントエンド
 
-Deploy the example using [Vercel](https://vercel.com):
+- 利用技術
+	- Next.js 9.4
+	- typeScript 3.8.3
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-typescript-graphql)
+- 内容
+  - Next.js 9.4からの機能 Incremental Static Regeneration (beta)を使ったwebサイト生成
+	- Apollo Clientを使ったGraphqlサーバーの利用
 
-## How to use
+## バックエンド
 
-### Using `create-next-app`
+- 利用技術
+  - Rails 
+  - Graphql
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+- 内容
+	- gem: graphql-rubyによるGraphqlサーバーの作成
+	- rakeタスク、heroku scheduleを使ったタスクの定期実行
 
-```bash
-npx create-next-app --example with-typescript-graphql with-typescript-graphql-app
-# or
-yarn create next-app --example with-typescript-graphql with-typescript-graphql-app
-```
+# この課題を通して学んだこと
 
-### Download manually
+- Next.jsの基本的な使用方法
+- SSR, SSGの理解
 
-Download the example:
+# 苦労した点, 改善点
 
-```bash
-curl https://codeload.github.com/vercel/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/with-typescript-graphql
-cd with-typescript-graphql
-```
+- Next.jsの更新が早いため、古い情報と混同し苦労した。
+- バックエンドが元はAPI用に作っていたものではないため、データ構造が甘くgraphqlでの取得方法が不格好になってしまった。
 
-Install it and run:
+# 参考
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- [Next.js 9.4 リリースノート全訳！ 段階的な静的再生成、新しい環境変数のサポートなど、見逃せない新機能が目白押し！ - Qiita](https://qiita.com/thesugar/items/95bc20aa98e31501bbfc#incremental-static-regeneration-beta/)
+- [Incremental Static Regeneration で実現する次世代のサーバーアーキテクチャ](https://mizchi.dev/202005182044-awesome-next-issg)
+- [What is Next.js Incremental Static (Re)Generation?](https://arunoda.me/blog/what-is-nextjs-issg)
